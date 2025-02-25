@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Получение кода</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        #timer {
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        #code {
+            font-size: 20px;
+            font-weight: bold;
+            color: green;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Жди 5 минут, чтобы получить код!</h2>
+    <p>Не закрывай и не обновляй страницу, иначе таймер начнется заново.</p>
+    <div id="timer">5:00</div>
+    <div id="code">Твой код: ABCdefGHIjklMNOpqrSTUvwxYZ1234</div>
+
+    <script>
+        function startTimer(duration, display) {
+            let timer = duration, minutes, seconds;
+            let interval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    clearInterval(interval);
+                    display.style.display = "none";
+                    document.getElementById("code").style.display = "block";
+                }
+            }, 1000);
+        }
+
+        window.onload = function () {
+            let fiveMinutes = 5 * 60;
+            let display = document.getElementById("timer");
+            startTimer(fiveMinutes, display);
+        };
+    </script>
+
+</body>
+</html>
